@@ -23,3 +23,8 @@ services:
       - MYSQL_DATABASE=wordpress
     volumes:
       - ./db:/var/lib/mysql
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
