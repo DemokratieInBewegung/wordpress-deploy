@@ -1,0 +1,25 @@
+version: "2.0"
+
+services:
+  wordpress:
+    image: wordpress
+    links:
+      - mariadb:mysql
+    environment:
+      - WORDPRESS_DB_PASSWORD=9a8ign3k4a0dlafa3024
+      - WORDPRESS_TABLE_PREFIX=wp_20170105_114905_
+      - VIRTUAL_SERVER="bewegung.jetzt"
+      - LETSENCRYPT_HOST=bewegung.jetzt
+      - LETSENCRYPT_EMAIL=benjamin.kampmann@bewegung.jetzt
+    expose:
+      - 80
+    volumes:
+      - ./wp-content:/var/www/html/wp-content:rw
+
+  mariadb:
+    image: mariadb
+    environment:
+      - MYSQL_ROOT_PASSWORD=9a8ign3k4a0dlafa3024
+      - MYSQL_DATABASE=wordpress
+    volumes:
+      - ./db:/var/lib/mysql
